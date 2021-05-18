@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		803258E82653B3E400122F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803258E72653B3E400122F59 /* AppDelegate.swift */; };
 		803258EA2653B3E400122F59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803258E92653B3E400122F59 /* SceneDelegate.swift */; };
-		803258EC2653B3E400122F59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803258EB2653B3E400122F59 /* ViewController.swift */; };
 		803258EF2653B3E400122F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 803258ED2653B3E400122F59 /* Main.storyboard */; };
 		803258F12653B3E500122F59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803258F02653B3E500122F59 /* Assets.xcassets */; };
 		803258F42653B3E500122F59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 803258F22653B3E500122F59 /* LaunchScreen.storyboard */; };
+		803258FD2653B5E200122F59 /* ContributorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803258FC2653B5E200122F59 /* ContributorInfo.swift */; };
+		803259012653BC5200122F59 /* ContributorsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803259002653BC5200122F59 /* ContributorsListVC.swift */; };
+		803259052653BC9800122F59 /* ContributorDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803259042653BC9800122F59 /* ContributorDetailVC.swift */; };
+		803259082653C1EE00122F59 /* ContributorInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803259072653C1EE00122F59 /* ContributorInfoCell.swift */; };
+		8032590A2653E94200122F59 /* ImageFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803259092653E94200122F59 /* ImageFetchingService.swift */; };
+		8032590C2653E99C00122F59 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032590B2653E99C00122F59 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		803258E42653B3E400122F59 /* GitHubContributorsList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubContributorsList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803258E72653B3E400122F59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		803258E92653B3E400122F59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		803258EB2653B3E400122F59 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		803258EE2653B3E400122F59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		803258F02653B3E500122F59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		803258F32653B3E500122F59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		803258F52653B3E500122F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		803258FC2653B5E200122F59 /* ContributorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorInfo.swift; sourceTree = "<group>"; };
+		803259002653BC5200122F59 /* ContributorsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorsListVC.swift; sourceTree = "<group>"; };
+		803259042653BC9800122F59 /* ContributorDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorDetailVC.swift; sourceTree = "<group>"; };
+		803259072653C1EE00122F59 /* ContributorInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorInfoCell.swift; sourceTree = "<group>"; };
+		803259092653E94200122F59 /* ImageFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchingService.swift; sourceTree = "<group>"; };
+		8032590B2653E99C00122F59 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,68 @@
 		803258E62653B3E400122F59 /* GitHubContributorsList */ = {
 			isa = PBXGroup;
 			children = (
+				803258FF2653B82600122F59 /* Representation Layer */,
+				803258FE2653B81900122F59 /* Logic Layer */,
+				803258FB2653B5C100122F59 /* Model */,
 				803258E72653B3E400122F59 /* AppDelegate.swift */,
 				803258E92653B3E400122F59 /* SceneDelegate.swift */,
-				803258EB2653B3E400122F59 /* ViewController.swift */,
 				803258ED2653B3E400122F59 /* Main.storyboard */,
 				803258F02653B3E500122F59 /* Assets.xcassets */,
 				803258F22653B3E500122F59 /* LaunchScreen.storyboard */,
 				803258F52653B3E500122F59 /* Info.plist */,
 			);
 			path = GitHubContributorsList;
+			sourceTree = "<group>";
+		};
+		803258FB2653B5C100122F59 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				803258FC2653B5E200122F59 /* ContributorInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		803258FE2653B81900122F59 /* Logic Layer */ = {
+			isa = PBXGroup;
+			children = (
+				803259092653E94200122F59 /* ImageFetchingService.swift */,
+				8032590B2653E99C00122F59 /* ImageCache.swift */,
+			);
+			path = "Logic Layer";
+			sourceTree = "<group>";
+		};
+		803258FF2653B82600122F59 /* Representation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				803259032653BC6F00122F59 /* Contributor Detail Module */,
+				803259022653BC5800122F59 /* Contributors List Module */,
+			);
+			path = "Representation Layer";
+			sourceTree = "<group>";
+		};
+		803259022653BC5800122F59 /* Contributors List Module */ = {
+			isa = PBXGroup;
+			children = (
+				803259062653C1DB00122F59 /* Subviews */,
+				803259002653BC5200122F59 /* ContributorsListVC.swift */,
+			);
+			path = "Contributors List Module";
+			sourceTree = "<group>";
+		};
+		803259032653BC6F00122F59 /* Contributor Detail Module */ = {
+			isa = PBXGroup;
+			children = (
+				803259042653BC9800122F59 /* ContributorDetailVC.swift */,
+			);
+			path = "Contributor Detail Module";
+			sourceTree = "<group>";
+		};
+		803259062653C1DB00122F59 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				803259072653C1EE00122F59 /* ContributorInfoCell.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +200,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				803258EC2653B3E400122F59 /* ViewController.swift in Sources */,
 				803258E82653B3E400122F59 /* AppDelegate.swift in Sources */,
 				803258EA2653B3E400122F59 /* SceneDelegate.swift in Sources */,
+				8032590C2653E99C00122F59 /* ImageCache.swift in Sources */,
+				803259052653BC9800122F59 /* ContributorDetailVC.swift in Sources */,
+				803258FD2653B5E200122F59 /* ContributorInfo.swift in Sources */,
+				8032590A2653E94200122F59 /* ImageFetchingService.swift in Sources */,
+				803259012653BC5200122F59 /* ContributorsListVC.swift in Sources */,
+				803259082653C1EE00122F59 /* ContributorInfoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
