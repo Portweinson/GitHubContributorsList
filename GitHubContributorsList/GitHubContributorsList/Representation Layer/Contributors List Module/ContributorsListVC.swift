@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ContributorsListVC: UITableViewController {
+class ContributorsListVC: UITableViewController, ShowAlertProtocol {
     
     
     //MARK: -
@@ -27,35 +27,60 @@ class ContributorsListVC: UITableViewController {
     private var contributors = [Contributor]()
     private let avatarPlaceholder = UIImage(named: "icon-avatar-placeholder-80x80")
     private var selectedContributor: SelectedContributor?
+    private let networkClient = ContributorsNetworkClient()
+    private var isDataFetchInProgress = false
+    
+    var selectedCell: ContributorInfoCell?
     
     
     //MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let url = URL(string: "https://api.github.com/repos/videolan/vlc/contributors") else {
-            return
-        }
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode([Contributor].self, from: data) {
-                    DispatchQueue.main.async {
-                        self.contributors = decodedResponse
-                        self.tableView.reloadData()
-                    }
-                    return
-                }
-            }
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-            
-        }.resume()
+        self.navigationController?.delegate = self
+        self.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        self.loadData()
     }
     
     deinit {
         ImageFetchingService.shared.cancelDownloads()
+    }
+    
+    
+    //MARK: - Data loading
+    
+    @objc func loadData() {
+        
+        guard isDataFetchInProgress == false else {return}
+        
+        isDataFetchInProgress = true
+        self.refreshControl?.beginRefreshing()
+        
+        networkClient.allContributors { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    self?.contributors = data
+                case .failure(let error):
+                    self?.handleError(error)
+                }
+                
+                self?.isDataFetchInProgress = false
+                self?.tableView.reloadData()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self?.refreshControl?.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    func handleError(_ error: ResponseError) {
+        let title = "Something went wrong"
+        let message = "Please try again later"
+        let action = UIAlertAction(title: "Dismiss", style: .cancel)
+        
+        showAlert(with: title, message: message, actions: [action])
     }
     
     
@@ -101,6 +126,7 @@ class ContributorsListVC: UITableViewController {
             
             self.selectedContributor = SelectedContributor(info: data,
                                                            image: cell.imgViewAvatar.image)
+            self.selectedCell = cell
             self.performSegue(withIdentifier: Segue.toDetail.rawValue, sender: nil)
         }
     }
@@ -115,5 +141,34 @@ class ContributorsListVC: UITableViewController {
             vc.data = data
         }
         super.prepare(for: segue, sender: sender)
+    }
+}
+
+
+
+//MARK: - UINavigationControllerDelegate
+
+extension ContributorsListVC: UINavigationControllerDelegate {
+
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        switch operation {
+        case .push:
+            if let to = toVC as? ContributorDetailVC {
+                return PushAnimator(duration: 0.35, from: self, to: to)
+            } else {
+                return nil
+            }
+        case .pop:
+            if let from = fromVC as? ContributorDetailVC {
+                return PopAnimator(duration: 0.35, from: from, to: self)
+            } else {
+                return nil
+            }
+        default:
+            return nil
+        }
     }
 }
